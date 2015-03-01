@@ -19,20 +19,9 @@ from toontown.parties.PartyGlobals import ActivityIds, DecorationIds
 from toontown.toonbase import ToontownGlobals
 scStructure = [
  [OTPLocalizer.SCMenuTesting,
-  [OTPLocalizer.SCMenuBugs,
-   30506,
-   30507,
-   30508,
-   30509,
-   30510,
-   30511
-  ],
   30500,
-  30501,
-  30502,
   30503,
-  30504,
-  30505
+  30504
  ],
  [OTPLocalizer.SCMenuHello,
   {100: 0},

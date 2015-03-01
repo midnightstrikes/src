@@ -238,7 +238,6 @@ SCMenuPets = 'PETS'
 SCMenuPetTricks = 'TRICKS'
 SCMenuCog = 'COG SPEAK'
 SCMenuTesting = 'TESTING'
-SCMenuBugs = 'BUGS'
 SCMenuHello = 'HELLO'
 SCMenuBye = 'GOODBYE'
 SCMenuConvo = 'CHIT CHAT'
@@ -1939,11 +1938,11 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  30450: "It's easy to be green!",
  30451: 'Visit Green Bean Jeans and you can be green too!',
  30452: "It's on Oak Street in Daisy Gardens.",
- 30500: "Welcome to Toontown Infinite!",
+ 30500: "Welcome to Toontown Online!",
  30501: "The Possibilities are Infinite.",
  30502: "Are you livestreaming?",
- 30503: "I'm livestreaming right now!",
- 30504: "I can't wait until the next Toontown Infinite update!",
+ 30503: "This is a test message!",
+ 30504: "I can't wait until the next Toontown update!",
  30505: "Did you know the TTI team works overtime to make the experience the best it can be?",
  30506: "I can't stand that bug!",
  30507: "Have you found any bugs yet?",
