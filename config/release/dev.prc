@@ -40,3 +40,11 @@ want-yin-yang #t
 show-population #t
 force-skip-tutorial #t
 want-instant-parties #t
+
+#	christmas
+#want-christmas #t
+#active-holidays 4, 57
+
+#	halloween
+#want-halloween #t
+#active-holidays 26, 27, 13
