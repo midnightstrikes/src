@@ -4312,45 +4312,47 @@ def hp(hp):
     """
     Modify the invoker's current HP.
     """
-    invoker = spellbook.getInvoker()
-    maxHp = invoker.getMaxHp()
+    target = spellbook.getTarget()
+    maxHp = target.getMaxHp()
     if not -1 <= hp <= maxHp:
         return 'HP must be in range (-1-%d).' % maxHp
     invoker.b_setHp(hp)
-    return 'Set your HP to: %d' % hp
+    return '%s: Set HP to: %d' % (_name, hp)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def maxHp(maxHp):
     """
-    Modify the invoker's max HP.
+    Modify the target's max HP.
     """
     if not 15 <= maxHp <= ToontownGlobals.MaxHpLimit:
         return 'HP must be in range (15-%d).' % ToontownGlobals.MaxHpLimit
-    invoker = spellbook.getTarget()
-    invoker.b_setHp(maxHp)
-    invoker.b_setMaxHp(maxHp)
-    invoker.toonUp(maxHp - invoker.getHp())
-    return 'Set your max HP to: %d' % maxHp
+    target = spellbook.getTarget()
+    target.b_setHp(maxHp)
+    target.b_setMaxHp(maxHp)
+    target.toonUp(maxHp - invoker.getHp())
+    return '%s: Set max HP to: %d' % (_name, maxHp)
 
 @magicWord(category=CATEGORY_MODERATOR, types=[str])
-def allSummons():
+def summons():
     """
     Max the invoker's summons
     """
-    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    _name = target.getName()
 
     numSuits = len(SuitDNA.suitHeadTypes)
     fullSetForSuit = 1 | 2 | 4
     allSummons = numSuits * [fullSetForSuit]
-    invoker.b_setCogSummonsEarned(allSummons)
-    return 'Lots of summons!'
+    Target.b_setCogSummonsEarned(allSummons)
+    return '%s: Lots of summons!' % _name
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str])
 def maxToon(missingTrack=None):
     """
-    Max the invoker's stats for end-level gameplay.
+    Max the target's stats for end-level gameplay.
     """
-    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    _name = target.getName()
 
     # First, unlock the invoker's Gag tracks:
     gagTracks = [1, 1, 1, 1, 1, 1, 1]
@@ -4363,23 +4365,23 @@ def maxToon(missingTrack=None):
         if index in (4, 5):
             return 'You are required to have Throw and Squirt.'
         gagTracks[index] = 0
-    invoker.b_setTrackAccess(gagTracks)
-    invoker.b_setMaxCarry(80)
+    target.b_setTrackAccess(gagTracks)
+    target.b_setMaxCarry(80)
 
     # Next, max out their experience for the tracks they have:
-    experience = Experience.Experience(invoker.getExperience(), invoker)
-    for i, track in enumerate(invoker.getTrackAccess()):
+    experience = Experience.Experience(target.getExperience(), target)
+    for i, track in enumerate(target.getTrackAccess()):
         if track:
             experience.experience[i] = (
                 Experience.MaxSkill - Experience.UberSkill)
-    invoker.b_setExperience(experience.makeNetString())
+    target.b_setExperience(experience.makeNetString())
 
     # Max out their Laff:
-    invoker.b_setMaxHp(ToontownGlobals.MaxHpLimit)
-    invoker.toonUp(invoker.getMaxHp() - invoker.hp)
+    target.b_setMaxHp(ToontownGlobals.MaxHpLimit)
+    target.toonUp(invoker.getMaxHp() - invoker.hp)
 
     # Unlock all of the emotes:
-    emotes = list(invoker.getEmoteAccess())
+    emotes = list(target.getEmoteAccess())
     for emoteId in OTPLocalizer.EmoteFuncDict.values():
         if emoteId >= len(emotes):
             continue
@@ -4388,58 +4390,58 @@ def maxToon(missingTrack=None):
         if emoteId in (17, 18, 19):
             continue
         emotes[emoteId] = 1
-    invoker.b_setEmoteAccess(emotes)
+    target.b_setEmoteAccess(emotes)
 
     # Max out their Cog suits:
     suitDeptCount = len(SuitDNA.suitDepts)
     cogParts = []
     for i in xrange(suitDeptCount):
         cogParts.append(CogDisguiseGlobals.PartsPerSuitBitmasks[i])
-    invoker.b_setCogParts(cogParts)
+    target.b_setCogParts(cogParts)
     maxSuitType = SuitDNA.suitsPerDept - 1
-    invoker.b_setCogTypes([maxSuitType] * suitDeptCount)
+    target.b_setCogTypes([maxSuitType] * suitDeptCount)
     maxSuitLevel = (SuitDNA.levelsPerSuit-1) + maxSuitType
-    invoker.b_setCogLevels([maxSuitLevel] * suitDeptCount)
+    target.b_setCogLevels([maxSuitLevel] * suitDeptCount)
     cogMerits = []
     for i in xrange(suitDeptCount):
         suitIndex = (SuitDNA.suitsPerDept * (i+1)) - 1
         suitMerits = CogDisguiseGlobals.MeritsPerLevel[suitIndex]
         cogMerits.append(suitMerits[SuitDNA.levelsPerSuit - 1])
-    invoker.b_setCogMerits(cogMerits)
-    invoker.b_setPromotionStatus([1] * suitDeptCount)
+    target.b_setCogMerits(cogMerits)
+    target.b_setPromotionStatus([1] * suitDeptCount)
 
     # Max their Cog gallery:
     deptCount = len(SuitDNA.suitDepts)
-    invoker.b_setCogCount(list(CogPageGlobals.COG_QUOTAS[1]) * deptCount)
+    target.b_setCogCount(list(CogPageGlobals.COG_QUOTAS[1]) * deptCount)
     cogStatus = [CogPageGlobals.COG_COMPLETE2] * SuitDNA.suitsPerDept
-    invoker.b_setCogStatus(cogStatus * deptCount)
-    invoker.b_setCogRadar([1, 1, 1, 1])
-    invoker.b_setBuildingRadar([1, 1, 1, 1])
+    target.b_setCogStatus(cogStatus * deptCount)
+    target.b_setCogRadar([1, 1, 1, 1])
+    target.b_setBuildingRadar([1, 1, 1, 1])
 
     # Max out their racing tickets:
-    invoker.b_setTickets(99999)
+    target.b_setTickets(99999)
 
     # Give them teleport access everywhere (including Cog HQs):
     hoods = list(ToontownGlobals.HoodsForTeleportAll)
-    invoker.b_setHoodsVisited(hoods)
-    invoker.b_setTeleportAccess(hoods)
+    target.b_setHoodsVisited(hoods)
+    target.b_setTeleportAccess(hoods)
 
     # Max their quest carry limit:
-    invoker.b_setQuestCarryLimit(4)
+    target.b_setQuestCarryLimit(4)
 
     # Complete their quests:
-    invoker.b_setQuests([])
-    invoker.b_setRewardHistory(Quests.ELDER_TIER, [])
+    target.b_setQuests([])
+    target.b_setRewardHistory(Quests.ELDER_TIER, [])
 
     # Max their money:
-    invoker.b_setMoney(invoker.getMaxMoney())
-    invoker.b_setBankMoney(10000)
+    target.b_setMoney(invoker.getMaxMoney())
+    target.b_setBankMoney(10000)
 
     # Finally, unlock all of their pet phrases:
     if simbase.wantPets:
-        invoker.b_setPetTrickPhrases(range(7))
+        target.b_setPetTrickPhrases(range(7))
 
-    return 'Maxed your Toon!'
+    return '%s: Maxed your Toon!' % _name
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def unlocks():
@@ -4476,9 +4478,10 @@ def sos(count, name):
     """
     Modifies the invoker's specified SOS card count.
     """
-    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    _name = target.getName()
     if not 0 <= count <= 100:
-        return 'Your SOS count must be in range (0-100).'
+        return 'The SOS count must be in range (0-100).'
     for npcId, npcName in TTLocalizer.NPCToonNames.items():
         if name.lower() == npcName.lower():
             if npcId not in NPCToons.npcFriends:
@@ -4486,33 +4489,35 @@ def sos(count, name):
             break
     else:
         return 'SOS card %s was not found!' % name
-    if (count == 0) and (npcId in invoker.NPCFriendsDict):
-        del invoker.NPCFriendsDict[npcId]
+    if (count == 0) and (npcId in target.NPCFriendsDict):
+        del target.NPCFriendsDict[npcId]
     else:
-        invoker.NPCFriendsDict[npcId] = count
-    invoker.d_setNPCFriendsDict(invoker.NPCFriendsDict)
-    return "You were given %d %s SOS cards." % (count, name)
+        target.NPCFriendsDict[npcId] = count
+    target.d_setNPCFriendsDict(invoker.NPCFriendsDict)
+    return "%s was given %d %s SOS cards." % (_name, count, name)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def unites(value=32767):
     """
     Restock all resistance messages.
     """
-    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    _name = target.getName()
     value = min(value, 32767)
     invoker.restockAllResistanceMessages(value)
-    return 'Restocked %d unites!' % value
+    return '%s: Restocked %d unites!' % (_name, value)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def fires(count):
     """
-    Modifies the invoker's pink slip count.
+    Modifies the targets's pink slip count.
     """
-    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    _name = target.getName()
     if not 0 <= count <= 255:
-        return 'Your fire count must be in range (0-255).'
+        return 'The fire count must be in range (0-255).'
     invoker.b_setPinkSlips(count)
-    return 'You were given %d fires.' % count
+    return '%s: Fire count was set to %d.' % (_name, count)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def money(money):
@@ -4520,11 +4525,12 @@ def money(money):
     Modifies the target's current money value.
     """
     target = spellbook.getTarget()
+    _name = target.getName()
     maxMoney = 10000
     if not 0 <= money <= maxMoney:
         return 'Money value must be in xrange (0-%d).' % maxMoney
     target.b_setMoney(money)
-    return "Set %s's money value to %d!" % (target.getName(), money)
+    return "%s: Set money value to %d!" % (_name, money)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int])
 def bank(command, value):
@@ -4606,7 +4612,7 @@ def hat(hatIndex, hatTex=0):
         return 'Invalid hat texture.'
     invoker = spellbook.getInvoker()
     invoker.b_setHat(hatIndex, hatTex, 0)
-    return "Set %s's hat to %d, %d!" % (invoker.getName(), hatIndex, hatTex)
+    return "%s: Set hat to %d, %d!" % (invoker.getName(), hatIndex, hatTex)
 
 @magicWord(category=CATEGORY_CREATIVE, types=[int, int])
 def glasses(glassesIndex, glassesTex=0):
@@ -4619,7 +4625,7 @@ def glasses(glassesIndex, glassesTex=0):
         return 'Invalid glasses texture.'
     invoker = spellbook.getInvoker()
     invoker.b_setGlasses(glassesIndex, glassesTex, 0)
-    return "Set %s's glasses to %d, %d!" % (invoker.getName(), glassesIndex, glassesTex)
+    return "%s: Set glasses to %d, %d!" % (invoker.getName(), glassesIndex, glassesTex)
 
 @magicWord(category=CATEGORY_CREATIVE, types=[int, int])
 def backpack(backpackIndex, backpackTex=0):
@@ -4632,7 +4638,7 @@ def backpack(backpackIndex, backpackTex=0):
         return 'Invalid backpack texture.'
     invoker = spellbook.getInvoker()
     invoker.b_setBackpack(backpackIndex, backpackTex, 0)
-    return "Set %s's backpack to %d, %d!" % (invoker.getName(), backpackIndex, backpackTex)
+    return "%s: Set backpack to %d, %d!" % (invoker.getName(), backpackIndex, backpackTex)
 
 @magicWord(category=CATEGORY_CREATIVE, types=[int, int])
 def shoes(shoesIndex, shoesTex=0):
@@ -4645,7 +4651,7 @@ def shoes(shoesIndex, shoesTex=0):
         return 'Invalid shoes texture.'
     invoker = spellbook.getInvoker()
     invoker.b_setShoes(shoesIndex, shoesTex, 0)
-    return "Set %s's shoes to %d, %d!" % (invoker.getName(), shoesIndex, shoesTex)
+    return "%s: Set shoes to %d, %d!" % (invoker.getName(), shoesIndex, shoesTex)
 
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[int])
 def gmIcon(accessLevel=None):
@@ -4696,13 +4702,14 @@ def ghost():
     Toggles invisibility on the invoker. Anyone with an access level below the
     invoker will not be able to see him or her.
     """
-    invoker = spellbook.getInvoker()
-    if invoker.ghostMode == 0:
-        invoker.b_setGhostMode(2)
-        return 'Ghost mode is enabled.'
+    target = spellbook.getTarget()
+    _name = target.getName()
+    if target.ghostMode == 0:
+        target.b_setGhostMode(2)
+        return '%s: Ghost mode is enabled.' % _name
     else:
-        invoker.b_setGhostMode(0)
-        return 'Ghost mode is disabled.'
+        target.b_setGhostMode(0)
+        return '%s: Ghost mode is disabled.' % _name
 
 @magicWord(category=CATEGORY_MODERATOR)
 def badName():
@@ -4715,7 +4722,7 @@ def badName():
     animalType = TTLocalizer.AnimalToSpecies[target.dna.getAnimal()]
     target.b_setName(colorString + ' ' + animalType)
     target.sendUpdate('WishNameState', ['REJECTED'])
-    return "Revoked %s's name!" % _name
+    return "%s: Revoked name!" % _name
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def tickets(tickets):
@@ -4735,13 +4742,14 @@ def cogIndex(index):
     """
     if not -1 <= index <= 3:
         return 'Invalid Cog index.'
-    invoker = spellbook.getInvoker()
-    invoker.b_setCogIndex(index)
-    return 'Set your Cog index to %d!' % index
+    target = spellbook.getTarget()
+    _name = target.getName()
+    target.b_setCogIndex(index)
+    return '%s: Set the Cog index to %d!' % (_name, index)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int, int])
 def inventory(a, b=None, c=None):
-    invoker = spellbook.getInvoker()
+    invoker = spellbook.getTarget()
     inventory = invoker.inventory
     if a == 'reset':
         maxLevelIndex = b or 5
@@ -4791,7 +4799,7 @@ def inventory(a, b=None, c=None):
 @magicWord(category=CATEGORY_CREATIVE, types=[str, str])
 def dna(part, value):
     """Modify a DNA part on the invoker."""
-    invoker = spellbook.getInvoker()
+    invoker = spellbook.getTarget()
 
     dna = ToonDNA.ToonDNA()
     dna.makeFromNetString(invoker.getDNAString())
@@ -5025,13 +5033,14 @@ def trackBonus(trackIndex):
     """
     Modify the invoker's track bonus level.
     """
-    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
     if not 0 <= trackIndex < 7:
         return 'Invalid track index!'
     trackBonusLevel = [0] * 7
     trackBonusLevel[trackIndex] = 1
-    invoker.b_setTrackBonusLevel(trackBonusLevel)
-    return 'Your track bonus level has been set!'
+    target.b_setTrackBonusLevel(trackBonusLevel)
+    _name = target.getName()
+    return '%s: The track bonus level has been set!' % _name
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, str, int])
 def track(command, track, value=None):
@@ -5040,7 +5049,7 @@ def track(command, track, value=None):
                  'squirt', 'drop').index(track.lower())
     except:
         return 'Invalid Gag track!'
-    invoker = spellbook.getInvoker()
+    invoker = spellbook.getTarget()
     trackAccess = invoker.getTrackAccess()
     if (command.lower() not in ('add',)) and (not trackAccess[index]):
         return "You don't have that track!"
@@ -5147,4 +5156,12 @@ def disguise(command, suitIndex, value):
         invoker.d_setCogMerits(invoker.cogMerits)
         return 'Merits set.'
     else:
-        return 'Unknow command: %s' % command
+        return 'Unknown command: %s' % command
+
+@magicWord(category=CATEGORY_PROGRAMMER)
+def immortal():
+ """ Makes target immune to attacks. """
+    target = spellbook.getTarget()
+    _name = target.getName()
+    target.setImmortalMode(not target.immortalMode)
+    return '%s: Immortal Mode %s' % (_name, 'ON' if invoker.immortalMode else 'OFF')
