@@ -5,7 +5,7 @@ rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
 set /P PPYTHON_PATH=<PPYTHON_PATH
 
 rem Get the user input:
-set ttiUsername="test"
+set ttiUsername="testadsas"
 
 rem Export the environment variables:
 set ttiPassword=password

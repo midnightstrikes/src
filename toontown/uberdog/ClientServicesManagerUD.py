@@ -125,7 +125,7 @@ class DeveloperAccountDB(AccountDB):
                 'success': True,
                 'userId': username,
                 'accountId': 0,
-                'accessLevel': max(600, minAccessLevel)
+                'accessLevel': max(100, minAccessLevel)
             }
             callback(response)
             return response
