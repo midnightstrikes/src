@@ -5,8 +5,8 @@ distribution dev
 model-path ../resources
 
 # Server:
-server-version infinite-dev
-min-access-level 600
+server-version ToonTown Online v.1.01
+min-access-level 0
 accountdb-type developer
 shard-low-pop 50
 shard-mid-pop 100
@@ -34,7 +34,7 @@ want-resistance-restock #t
 want-resistance-dance #t
 
 # Optional:
-want-yin-yang #t
+want-yin-yang #f
 
 # Developer options:
 show-population #t
