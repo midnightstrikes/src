@@ -4449,6 +4449,7 @@ def unlocks():
     Unlocks the invoker's teleport access, emotions, and pet trick phrases.
     """
     target = spellbook.getTarget()
+    _name = target.getName()
     
 
     # First, unlock their teleport access:
