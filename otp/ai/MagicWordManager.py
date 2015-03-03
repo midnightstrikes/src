@@ -42,4 +42,4 @@ class MagicWordManager(DistributedObject.DistributedObject):
 
     def sendMagicWordResponse(self, response):
         self.notify.info(response)
-        base.localAvatar.setSystemMessage(0, 'Spellbook: ' + str(response))
+        base.localAvatar.setSystemMessage(0, str(response))

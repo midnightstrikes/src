@@ -4377,7 +4377,7 @@ def maxToon(missingTrack=None):
     target.b_setExperience(experience.makeNetString())
 
     # Max out their Laff:
-    target.b_setMaxHp(ToontownGlobals.MaxHpLimit)
+    target.b_setMaxHp(137)
     target.toonUp(target.getMaxHp() - target.hp)
 
     # Unlock all of the emotes:
