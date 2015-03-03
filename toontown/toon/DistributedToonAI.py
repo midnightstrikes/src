@@ -5161,3 +5161,9 @@ def disguise(command, suitIndex, value):
     else:
         return 'Unknown command: %s' % command
 
+@magicWord(category=CATEGORY_PROGRAMMER)
+def getAccess():
+    target = spellbook.getTarget()
+    _name = target.getName()
+    _access_ = target.getAdminAccess()
+    return 'Player: %s, Access level: %s' % (_name, _access_)
