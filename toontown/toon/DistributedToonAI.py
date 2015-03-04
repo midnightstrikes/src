@@ -5167,3 +5167,10 @@ def getAccess():
     _name = target.getName()
     _access_ = target.getAdminAccess()
     return 'Player: %s, Access level: %s' % (_name, _access_)
+
+@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def pouch(amt):
+	target = spellbook.getTarget()
+	_name = target.getName()
+    target.b_setMaxCarry(amt)
+    return "%s: Pouch size to %d" % (_name, amt)
