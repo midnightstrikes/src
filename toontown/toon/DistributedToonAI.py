@@ -5168,9 +5168,9 @@ def getAccess():
     _access_ = target.getAdminAccess()
     return 'Player: %s, Access level: %s' % (_name, _access_)
 
-@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
-def pouch(amt):
-	target = spellbook.getTarget()
-	_name = target.getName()
-    target.b_setMaxCarry(amt)
-    return "%s: Pouch size to %d" % (_name, amt)
+@magicWord(category=CATEGORY_ADMINISTRATOR)
+def immortal():
+    """ Make target (if 500+) or self (if 499-) immortal. """
+    av = spellbook.getTarget()
+    av.setImmortalMode(not av.immortalMode)
+    return 'Toggled immortal mode %s for %s' % ('ON' if av.immortalMode else 'OFF', av.getName())
