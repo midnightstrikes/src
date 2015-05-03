@@ -13,36 +13,36 @@ class ToontownLoadingScreen:
 
     defaultTex = 'phase_3.5/maps/loading/default.jpg'
     zone2picture = {
-        ToontownGlobals.GoofySpeedway : 'phase_3.5/maps/loading/gs.jpg',
-        ToontownGlobals.ToontownCentral : 'phase_3.5/maps/loading/ttc.jpg',
-        ToontownGlobals.SillyStreet : 'phase_3.5/maps/loading/ttc_ss.jpg',
-        ToontownGlobals.LoopyLane : 'phase_3.5/maps/loading/ttc_ll.jpg',
-        ToontownGlobals.PunchlinePlace : 'phase_3.5/maps/loading/ttc_pp.jpg',
-        ToontownGlobals.DonaldsDock : 'phase_3.5/maps/loading/dd.jpg',
-        ToontownGlobals.BarnacleBoulevard : 'phase_3.5/maps/loading/dd_bb.jpg',
-        ToontownGlobals.SeaweedStreet : 'phase_3.5/maps/loading/dd_ss.jpg',
-        ToontownGlobals.LighthouseLane : 'phase_3.5/maps/loading/dd_ll.jpg',
-        ToontownGlobals.DaisyGardens : 'phase_3.5/maps/loading/dg.jpg',
-        ToontownGlobals.ElmStreet : 'phase_3.5/maps/loading/dg_es.jpg',
-        ToontownGlobals.MapleStreet : 'phase_3.5/maps/loading/dg_ms.jpg',
-        ToontownGlobals.OakStreet : 'phase_3.5/maps/loading/dg_os.jpg',
-        ToontownGlobals.MinniesMelodyland : 'phase_3.5/maps/loading/mml.jpg',
-        ToontownGlobals.AltoAvenue : 'phase_3.5/maps/loading/mml_aa.jpg',
-        ToontownGlobals.BaritoneBoulevard : 'phase_3.5/maps/loading/mml_bb.jpg',
-        ToontownGlobals.TenorTerrace : 'phase_3.5/maps/loading/mml_tt.jpg',
-        ToontownGlobals.TheBrrrgh : 'phase_3.5/maps/loading/tb.jpg',
-        ToontownGlobals.WalrusWay : 'phase_3.5/maps/loading/tb_ww.jpg',
-        ToontownGlobals.SleetStreet : 'phase_3.5/maps/loading/tb_ss.jpg',
-        ToontownGlobals.PolarPlace : 'phase_3.5/maps/loading/tb_pp.jpg',
-        ToontownGlobals.DonaldsDreamland : 'phase_3.5/maps/loading/ddl.jpg',
-        ToontownGlobals.LullabyLane : 'phase_3.5/maps/loading/ddl_ll.jpg',
-        ToontownGlobals.PajamaPlace : 'phase_3.5/maps/loading/ddl_pp.jpg',
-        ToontownGlobals.OutdoorZone : 'phase_3.5/maps/loading/oz.jpg',
-        ToontownGlobals.GolfZone : 'phase_3.5/maps/loading/gz.jpg',
-        ToontownGlobals.SellbotHQ : 'phase_3.5/maps/loading/sbhq.jpg',
-        ToontownGlobals.CashbotHQ : 'phase_3.5/maps/loading/cbhq.jpg',
-        ToontownGlobals.LawbotHQ : 'phase_3.5/maps/loading/lbhq.jpg',
-        ToontownGlobals.BossbotHQ : 'phase_3.5/maps/loading/bbhq.jpg'
+        ToontownGlobals.GoofySpeedway : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.ToontownCentral : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.SillyStreet : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.LoopyLane : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.PunchlinePlace : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.DonaldsDock : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.BarnacleBoulevard : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.SeaweedStreet : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.LighthouseLane : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.DaisyGardens : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.ElmStreet : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.MapleStreet : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.OakStreet : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.MinniesMelodyland : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.AltoAvenue : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.BaritoneBoulevard : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.TenorTerrace : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.TheBrrrgh : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.WalrusWay : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.SleetStreet : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.PolarPlace : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.DonaldsDreamland : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.LullabyLane : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.PajamaPlace : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.OutdoorZone : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.GolfZone : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.SellbotHQ : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.CashbotHQ : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.LawbotHQ : 'phase_3.5/maps/loading/default.jpg',
+        ToontownGlobals.BossbotHQ : 'phase_3.5/maps/loading/default.jpg'
     }
 
     def __init__(self):
@@ -50,7 +50,7 @@ class ToontownLoadingScreen:
         self.__count = 0
         self.gui = loader.loadModel('phase_3/models/gui/progress-background.bam')
         self.title = DirectLabel(guiId='ToontownLoadingScreenTitle', parent=self.gui, relief=None, pos=(base.a2dRight/5, 0, 0.235), text='', textMayChange=1, text_scale=0.08, text_fg=(0.03, 0.83, 0, 1), text_align=TextNode.ALeft, text_font=ToontownGlobals.getSignFont())
-        self.waitBar = DirectWaitBar(guiId='ToontownLoadingScreenWaitBar', parent=self.gui, frameSize=(base.a2dLeft+(base.a2dRight/5), base.a2dRight-(base.a2dRight/5), -0.03, 0.03), pos=(0, 0, 0.15), text='')
+        self.waitBar = DirectWaitBar(guiId='ToontownLoadingScreenWaitBar', parent=self.gui, frameSize=(base.a2dLeft+(base.a2dRight/4.95), base.a2dRight-(base.a2dRight/4.95), -0.03, 0.03), pos=(0, 0, 0.15), text='')
         logoScale = 0.5625  # Scale for our locked aspect ratio (2:1).
         self.logo = OnscreenImage(
             image='phase_3/maps/toontown-logo.png',
@@ -82,7 +82,16 @@ class ToontownLoadingScreen:
         if gui:
             if base.localAvatarStyle:
                 from toontown.toon import Toon
-                self.waitBar['frameSize'] = (base.a2dLeft+(base.a2dRight/5), base.a2dRight-(base.a2dRight/5), -0.03, 0.03)
+                self.toon = Toon.Toon()
+                self.toon.setDNA(base.localAvatarStyle)
+                self.toon.loop('bored', fromFrame=135, toFrame=135)
+                self.toon.getGeomNode().setDepthWrite(1)
+                self.toon.getGeomNode().setDepthTest(1)
+                self.toon.setHpr(205, 0, 0)
+                self.toon.setScale(0.18)
+                self.toon.setPos(base.a2dBottomRight.getX()/1.25, 0, -0.034)
+                #self.toon.reparentTo(self.waitBar)
+                self.waitBar['frameSize'] = (base.a2dLeft+(base.a2dRight/8.15), base.a2dRight-(base.a2dRight/8.15), -0.03, 0.03)
             self.title.reparentTo(base.a2dpBottomLeft, LOADING_SCREEN_SORT_INDEX)
             self.title.setPos(0.24, 0, 0.23)
             self.gui.setPos(0, -0.1, 0)
